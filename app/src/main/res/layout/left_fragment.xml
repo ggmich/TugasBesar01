@@ -11,20 +11,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Home"
-            android:gravity="left|center_vertical"
-            android:background="?android:attr/selectableItemBackground"
-            android:layout_marginLeft="10dp" />
-
         <TextView
             android:id="@+id/tvHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
             android:text="@string/home"/>
 
         <TextView
@@ -32,6 +26,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/cari"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
             android:textSize="18sp">
         </TextView>
 
@@ -40,6 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/menu"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
             android:textSize="18sp">
         </TextView>
         <TextView
@@ -47,13 +47,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/setting"
+            android:layout_marginLeft="10dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp"
             android:textSize="18sp">
         </TextView>
         <TextView
             android:id="@+id/tvExit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="@string/exit"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp"
             android:textSize="18sp">
         </TextView>
 

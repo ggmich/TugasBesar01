@@ -1,5 +1,7 @@
 package com.example.tugasbesar01;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,11 +16,15 @@ import androidx.fragment.app.Fragment;
 import com.example.tugasbesar01.databinding.MenuFragmentBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-
 public class MenuFragment extends Fragment {
 
     private MenuFragmentBinding binding;
+
+    /*
+        Test Storage
+     */
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
 
 
@@ -39,11 +45,17 @@ public class MenuFragment extends Fragment {
 
         ListView listView = (ListView)view.findViewById(R.id.listMenu);
 
+        //test storage
+        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        editor = preferences.edit();
+        editor.putString("1","dari storage");
+        editor.commit();
+
         /*
             retrieve data from storage at here
 
          */
-        final String[] items = new String[] {"Nasi Goreng","Nasi Ayam","Nasi Uduk"};
+        final String[] items = new String[] {"Nasi Goreng","Nasi Ayam","Nasi Uduk", preferences.getString("1","tidak ada")};
 
         /*
             ListView Setup

@@ -21,15 +21,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
-        fragmentManager = this.getSupportFragmentManager();
         this.toolbar = findViewById(R.id.toolbar);
+        this.drawer = findViewById(R.id.drawer_layout);
         this.setSupportActionBar(toolbar);
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.app_name,R.string.app_name);
+        drawer.addDrawerListener(abdt);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // TOMBOL GARIS 3
-        ActionBarDrawerToggle adbt = new ActionBarDrawerToggle(this,drawer,R.string.openDrawer,R.string.closeDrawer);
-        drawer.addDrawerListener(adbt);
-        adbt.syncState();
+        abdt.syncState();
     }
 }

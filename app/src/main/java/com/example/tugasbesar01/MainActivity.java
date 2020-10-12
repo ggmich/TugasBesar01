@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
     FragmentManager fragmentManager;
     FragmentTransaction ft;
 
+    //debug
+    MenuFragment menuFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,15 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.makan_apa,R.string.makan_apa);
         drawer.addDrawerListener(abdt);
         abdt.syncState();
+
+        //debug
+        fragmentManager = getSupportFragmentManager();
+        this.menuFragment = MenuFragment.newInstance("test");
+        ft = this.fragmentManager.beginTransaction();
+        ft.add(R.id.fragment_container,this.menuFragment)
+                .addToBackStack(null)
+                .commit();
+
 
 
     }

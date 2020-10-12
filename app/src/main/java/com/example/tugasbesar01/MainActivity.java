@@ -11,6 +11,9 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.view.View;
+
+import com.example.tugasbesar01.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements fragmentListener{
     Activity activity;
@@ -19,18 +22,22 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
     FragmentManager fragmentManager;
     FragmentTransaction ft;
 
+    private ActivityMainBinding binding;
+
     //debug
     MenuFragment menuFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
         //toolbar
         this.toolbar = findViewById(R.id.toolbar);
         this.drawer = findViewById(R.id.drawer_layout);
-        this.setSupportActionBar(toolbar);
+        this.setSupportActionBar(binding.toolbar);
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.makan_apa,R.string.makan_apa);
         drawer.addDrawerListener(abdt);
         abdt.syncState();

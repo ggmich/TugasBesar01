@@ -39,7 +39,7 @@
         android:layout_gravity="start">
 
         <fragment
-            android:name="com.example.t0318027.LeftFragment"
+            android:name="com.example.tugasbesar01.LeftFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </fragment>
@@ -53,7 +53,7 @@
         android:layout_gravity="right">
 
         <fragment
-            android:name="com.example.t0318027.RightFragment"
+            android:name="com.example.tugasbesar01.RightFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </fragment>

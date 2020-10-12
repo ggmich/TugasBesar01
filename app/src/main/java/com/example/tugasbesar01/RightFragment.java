@@ -11,6 +11,7 @@ public class RightFragment extends Fragment {
 
 
     public RightFragment() {
+
     }
 
     @Override

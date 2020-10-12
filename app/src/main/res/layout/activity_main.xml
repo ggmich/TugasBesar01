@@ -45,20 +45,7 @@
         </fragment>
 
     </RelativeLayout>
-    <!--  Right Drawer  -->
-    <RelativeLayout
-        android:id="@+id/right_drawer"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right">
 
-        <fragment
-            android:name="com.example.tugasbesar01.RightFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </fragment>
-
-    </RelativeLayout>
 
 
 

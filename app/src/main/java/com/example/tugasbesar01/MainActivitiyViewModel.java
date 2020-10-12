@@ -11,7 +11,9 @@ public class MainActivitiyViewModel extends ViewModel {
         this.foodList = new MutableLiveData<>();
     }
 
-    public void foodRandomize(){
+    public String foodRandomize(){
 
+
+        return  "test";
     }
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Menu x"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:id="@+id/menu_type"
+        android:layout_marginBottom="50dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/menu_type"
+        android:text="Deskripsi"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/desc"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/desc"
+        android:text="Tag :"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/tag"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tag"
+        android:text="Bahan:"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/bahan"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bahan"
+        android:text="Langkah Memasak:"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="120dp"
+        android:id="@+id/step"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/step"
+        android:text="Tersedia di Resto :"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/available"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:srcCompat="@android:drawable/ic_menu_camera">
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    </RelativeLayout>
+
+</RelativeLayout>

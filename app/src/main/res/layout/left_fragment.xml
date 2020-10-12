@@ -12,34 +12,42 @@
         android:orientation="vertical">
 
         <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            />
-
-        <TextView
             android:id="@+id/tvHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="@string/home"/>
 
+        <TextView
+            android:id="@+id/tvCari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cari"
             android:textSize="18sp">
         </TextView>
 
         <TextView
-            android:id="@+id/tvPage2"
+            android:id="@+id/tvMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:text="@string/menu"
+            android:textSize="18sp">
+        </TextView>
+        <TextView
+            android:id="@+id/tvSetting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setting"
             android:textSize="18sp">
         </TextView>
         <TextView
             android:id="@+id/tvExit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:text="@string/exit"
             android:textSize="18sp">
         </TextView>
+
 
     </LinearLayout>
 

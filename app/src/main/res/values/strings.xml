@@ -3,4 +3,9 @@
     <string name="makan_apa">Makan Apa</string>
     <string name="makan_apa_hari_ini">Makan Apa Hari ini?</string>
     <string name="cari">Cari</string>
+    <string name="home">Home</string>
+    <string name="cari">Cari</string>
+    <string name="menu">Menu</string>
+    <string name="setting">Setting</string>
+    <string name="exit">Exit</string>
 </resources>

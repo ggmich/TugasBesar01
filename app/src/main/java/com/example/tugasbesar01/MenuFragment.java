@@ -32,10 +32,22 @@ public class MenuFragment extends Fragment {
 
         ListView listView = (ListView)view.findViewById(R.id.listMenu);
 
+        /*
+            retrieve data from storage at here
+
+         */
         final String[] items = new String[] {"Nasi Goreng","Nasi Ayam","Nasi Uduk"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,items);
+
+        /*
+            ListView Setup
+         */
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,R.id.textList,items);
+        listView.setDividerHeight(3);
         listView.setAdapter(adapter);
 
+        /*
+            Floating Action Button setup
+         */
         FloatingActionButton fab = view.findViewById(R.id.fabPlus);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

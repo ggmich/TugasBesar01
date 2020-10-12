@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menuTitle">
+        <item>Ayam Geprek Tata</item>
+        <item>Ayam Goreng KFC</item>
+        <item>Ayam Bakar Bali</item>
+        <item>Yamien Manis Ayam</item>
+        <item>Yamien Asin Jamur</item>
+        <item>Sop Buntut Goreng</item>
+        <item>Sop Ayam</item>
+        <item>Soto Bandung</item>
+        <item>Sate Kulit Ayam</item>
+        <item>Sate Taichan</item>
+    </string-array>
+</resources>

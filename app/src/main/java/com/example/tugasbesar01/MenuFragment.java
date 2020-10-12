@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.tugasbesar01.databinding.MenuFragmentBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Map;
 
 public class MenuFragment extends Fragment {
 
@@ -46,16 +46,20 @@ public class MenuFragment extends Fragment {
         ListView listView = (ListView)view.findViewById(R.id.listMenu);
 
         //test storage
-        preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        preferences = getActivity().getSharedPreferences("title",Context.MODE_PRIVATE);
         editor = preferences.edit();
-        editor.putString("1","dari storage");
-        editor.commit();
 
         /*
             retrieve data from storage at here
 
          */
-        final String[] items = new String[] {"Nasi Goreng","Nasi Ayam","Nasi Uduk", preferences.getString("1","tidak ada")};
+        String[] items = new String[retrieveData().length-1];
+        for(int i = 0; i < retrieveData().length-1; i++){
+            if(retrieveData()[i] != null){
+                items[i] = retrieveData()[i];
+            }
+            Log.i("test: ", items[i]);
+        }
 
         /*
             ListView Setup
@@ -71,10 +75,28 @@ public class MenuFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), preferences.getString("2","error"), Toast.LENGTH_SHORT).show();
+                String test[] = retrieveData();
+                //Log.i("debug",test[0]);
             }
         });
 
         return view;
+    }
+
+    public  String[] retrieveData(){
+        Map<String, ?> allEntry = preferences.getAll();
+        String temp[];
+        int index = 1;
+        for(Map.Entry<String, ?> entry : allEntry.entrySet()){
+            //Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
+            index++;
+        }
+        temp = new String[index];
+
+        for(Map.Entry<String, ?> entry : allEntry.entrySet()){
+            temp[Integer.parseInt(entry.getKey())] = entry.getValue().toString();
+        }
+        return temp;
     }
 }

@@ -1,18 +1,24 @@
 package com.example.tugasbesar01;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 
+import com.example.tugasbesar01.databinding.MenuFragmentBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class MenuFragment extends Fragment {
+
+    private MenuFragmentBinding binding;
 
 
 
@@ -28,7 +34,8 @@ public class MenuFragment extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.menu_fragment,container,false);
+        binding = MenuFragmentBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
 
         ListView listView = (ListView)view.findViewById(R.id.listMenu);
 
@@ -48,11 +55,11 @@ public class MenuFragment extends Fragment {
         /*
             Floating Action Button setup
          */
-        FloatingActionButton fab = view.findViewById(R.id.fabPlus);
+        FloatingActionButton fab = binding.fabPlus;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
@@ -29,7 +30,11 @@ public class MenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_fragment,container,false);
 
+        ListView listView = (ListView)view.findViewById(R.id.listMenu);
 
+        final String[] items = new String[] {"Nasi Goreng","Nasi Ayam","Nasi Uduk"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,items);
+        listView.setAdapter(adapter);
 
         FloatingActionButton fab = view.findViewById(R.id.fabPlus);
         fab.setOnClickListener(new View.OnClickListener() {

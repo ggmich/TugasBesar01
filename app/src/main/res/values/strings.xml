@@ -7,4 +7,6 @@
     <string name="menu">Menu</string>
     <string name="setting">Setting</string>
     <string name="exit">Exit</string>
+    <string name="openDrawer">buka</string>
+    <string name="closeDrawer">tutup</string>
 </resources>

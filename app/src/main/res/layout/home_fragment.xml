@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="@android:color/white">
+    android:layout_gravity="center">
     <TextView
         android:layout_width="0dp"
         android:layout_height="200dp"
@@ -16,25 +15,32 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginBottom="5dp"
-        android:gravity="right"
         android:layout_below="@+id/emptyview"
-        android:textSize="24dp"
-        android:text="Makan Apa" />
+        android:textSize="24sp"
+        android:text="@string/makan_apa" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hari Ini?"
+        android:text="@string/hari_ini"
         android:layout_below="@+id/apa"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:id="@+id/harini"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="70dp"
         />
+
+    <TextView
+        android:id="@+id/titleRes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
     <Button
+        android:id="@+id/buttonCari"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="Cari"
+        android:text="@string/cari"
         android:layout_below="@+id/harini"
         android:layout_centerHorizontal="true"/>
 

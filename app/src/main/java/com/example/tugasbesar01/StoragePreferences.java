@@ -20,26 +20,7 @@ public class StoragePreferences extends Activity {
         this.menuTitleEditor = menuTitleEditor;
     }
 
-    /*
-            @SuppressLint("CommitPrefEdits")
-            public StoragePreferences() {
-
-                this.menuTitlePref = getSharedPreferences("title", Context.MODE_PRIVATE);
-
-                this.menuDescPref = getSharedPreferences("desc", Context.MODE_PRIVATE);
-                this.menuTagPref = getSharedPreferences("tag", Context.MODE_PRIVATE);
-                this.menuRecipePref = getSharedPreferences("recipe", Context.MODE_PRIVATE);
-
-
-                this.menuTitleEditor = menuTitlePref.edit();
-
-                this.menuDescEditor = menuDescPref.edit();
-                this.menuTagEditor = menuTagPref.edit();
-                this.menuRecipeEditor = menuRecipePref.edit();
-
-
-            }
-        */
+   
     public String[] getMenuString(){
         /*
             retrieve data from storage at here

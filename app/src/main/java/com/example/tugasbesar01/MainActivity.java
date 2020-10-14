@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
         //debug
 
         fragmentManager = getSupportFragmentManager();
-        this.menuFragment = MenuFragment.newInstance("test");
+        this.homeFragment =new HomeFragment();
         ft = this.fragmentManager.beginTransaction();
-        ft.add(R.id.fragment_container,this.menuFragment)
+        ft.add(R.id.fragment_container,this.homeFragment)
                 .addToBackStack(null)
                 .commit();
 
@@ -102,8 +102,6 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
             editor.putString(String.valueOf(i),menuTitleArray[i]);
         }
         editor.apply();
-        //preferences.edit().clear().commit();
-        //editor.putString("1","dari storage");
 
     }
 }

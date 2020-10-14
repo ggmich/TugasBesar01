@@ -1,10 +1,14 @@
 package com.example.tugasbesar01;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,7 +20,7 @@ public class HomeFragment extends Fragment {
     private HomeFragmentBinding binding;
     private HomeFragmentViewModel model;
     public Observer<String> titleObserver;
-    private SharedPreferences preferences;
+    StoragePreferences obj;
 
     public HomeFragment() {
 
@@ -24,26 +28,25 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        final SharedPreferences pref = this.getActivity().getSharedPreferences("title", Context.MODE_PRIVATE);
+        obj = new StoragePreferences(pref,pref.edit());
+        model = new HomeFragmentViewModel();
+
         binding = HomeFragmentBinding.inflate(inflater,container,false);
 
         binding.buttonCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                String temp[] = obj.getMenuString();
+                //Log.i("title", temp[model.randomMenuTitle(temp)]);
+                binding.titleRes.setText(temp[model.randomMenuTitle(temp)]);
             }
         });
 
         View view = binding.getRoot();
 
-        return view;
-    }
-
-    @Override
-    public void onViewCreated( View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-
         //view model
+        /*
         model = new ViewModelProvider(requireActivity()).get(HomeFragmentViewModel.class);
 
         titleObserver = new Observer<String>() {
@@ -52,7 +55,11 @@ public class HomeFragment extends Fragment {
                 // on change UI
             }
         };
+        */
 
 
+        return view;
     }
+
+
 }

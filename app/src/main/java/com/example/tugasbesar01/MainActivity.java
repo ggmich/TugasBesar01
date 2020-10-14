@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
 
     //debug
     MenuFragment menuFragment;
+    HomeFragment homeFragment;
 
     /*
         Test Storage
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
         View view = binding.getRoot();
         setContentView(view);
 
-        //debug
+        // database initialization
         setDatabase();
 
         //toolbar
@@ -55,12 +56,14 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
         abdt.syncState();
 
         //debug
+
         fragmentManager = getSupportFragmentManager();
         this.menuFragment = MenuFragment.newInstance("test");
         ft = this.fragmentManager.beginTransaction();
         ft.add(R.id.fragment_container,this.menuFragment)
                 .addToBackStack(null)
                 .commit();
+
 
 
 
@@ -99,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
             editor.putString(String.valueOf(i),menuTitleArray[i]);
         }
         editor.apply();
+        //preferences.edit().clear().commit();
         //editor.putString("1","dari storage");
 
     }

@@ -10,4 +10,7 @@
     <string name="openDrawer">buka</string>
     <string name="closeDrawer">tutup</string>
     <string name="submit">submit</string>
+
+    <string name="hari_ini">Hari Ini?</string>
+
 </resources>

@@ -33,7 +33,11 @@
     <TextView
         android:id="@+id/titleRes"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:layout_below="@id/buttonCari"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30sp">
 
     </TextView>
     <Button

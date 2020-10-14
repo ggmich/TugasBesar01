@@ -1,6 +1,7 @@
 package com.example.tugasbesar01;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -9,29 +10,36 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Map;
 
-public class StoragePreferences extends AppCompatActivity {
+public class StoragePreferences extends Activity {
 
     protected SharedPreferences menuTitlePref,menuDescPref,menuTagPref,menuRecipePref;
     protected SharedPreferences.Editor menuTitleEditor, menuDescEditor,menuTagEditor,menuRecipeEditor;
 
-    @SuppressLint("CommitPrefEdits")
-    public StoragePreferences() {
-        this.menuTitlePref = getSharedPreferences("title", Context.MODE_PRIVATE);
-        /*
-        this.menuDescPref = getSharedPreferences("desc", Context.MODE_PRIVATE);
-        this.menuTagPref = getSharedPreferences("tag", Context.MODE_PRIVATE);
-        this.menuRecipePref = getSharedPreferences("recipe", Context.MODE_PRIVATE);
-
-         */
-        this.menuTitleEditor = menuTitlePref.edit();
-        /*
-        this.menuDescEditor = menuDescPref.edit();
-        this.menuTagEditor = menuTagPref.edit();
-        this.menuRecipeEditor = menuRecipePref.edit();
-
-         */
+    public StoragePreferences(SharedPreferences menuTitlePref, SharedPreferences.Editor menuTitleEditor) {
+        this.menuTitlePref = menuTitlePref;
+        this.menuTitleEditor = menuTitleEditor;
     }
 
+    /*
+            @SuppressLint("CommitPrefEdits")
+            public StoragePreferences() {
+
+                this.menuTitlePref = getSharedPreferences("title", Context.MODE_PRIVATE);
+
+                this.menuDescPref = getSharedPreferences("desc", Context.MODE_PRIVATE);
+                this.menuTagPref = getSharedPreferences("tag", Context.MODE_PRIVATE);
+                this.menuRecipePref = getSharedPreferences("recipe", Context.MODE_PRIVATE);
+
+
+                this.menuTitleEditor = menuTitlePref.edit();
+
+                this.menuDescEditor = menuDescPref.edit();
+                this.menuTagEditor = menuTagPref.edit();
+                this.menuRecipeEditor = menuRecipePref.edit();
+
+
+            }
+        */
     public String[] getMenuString(){
         /*
             retrieve data from storage at here
@@ -42,7 +50,7 @@ public class StoragePreferences extends AppCompatActivity {
             if(retrieveData()[i] != null){
                 items[i] = retrieveData()[i];
             }
-            Log.i("test: ", items[i]);
+           // Log.i("test: ", items[i]);
         }
         return items;
     }

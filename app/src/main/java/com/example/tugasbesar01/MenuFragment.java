@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class MenuFragment extends Fragment {
         View view = binding.getRoot();
 
 
-        ListView listView = (ListView)view.findViewById(R.id.listMenu);
+        final ListView listView = (ListView)view.findViewById(R.id.listMenu);
 
         /*
             retrieve data from storage at here
@@ -59,6 +60,13 @@ public class MenuFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,R.id.textList,items);
         listView.setDividerHeight(3);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedFromList = (String) listView.getItemAtPosition(i);
+                Toast.makeText(getContext(), selectedFromList, Toast.LENGTH_LONG).show();
+            }
+        });
 
         /*
             Floating Action Button setup

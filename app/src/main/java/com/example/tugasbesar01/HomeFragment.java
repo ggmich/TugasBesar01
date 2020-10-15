@@ -34,11 +34,16 @@ public class HomeFragment extends Fragment {
 
         binding = HomeFragmentBinding.inflate(inflater,container,false);
 
+        /*
+            View Button binding
+
+            for click listener buttonCari, to set the text below button
+            the text set to random by randomMenuTitle() method
+         */
         binding.buttonCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String temp[] = obj.getMenuString();
-                //Log.i("title", temp[model.randomMenuTitle(temp)]);
                 binding.titleRes.setText(temp[model.randomMenuTitle(temp)]);
             }
         });

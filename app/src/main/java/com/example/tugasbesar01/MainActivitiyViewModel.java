@@ -13,9 +13,5 @@ public class MainActivitiyViewModel extends ViewModel {
     }
 
 
-    public String foodRandomize(){
 
-
-        return  "test";
-    }
 }

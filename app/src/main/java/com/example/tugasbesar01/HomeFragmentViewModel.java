@@ -42,6 +42,13 @@ public class HomeFragmentViewModel extends ViewModel {
         this.list = list;
     }
 
+    /*
+        randomMenuTitle
+
+        Get random number from 0 to the list.length
+        this random number is use for data index
+     */
+
     public int randomMenuTitle(String list[]){
         Random rn = new Random();
         int res = 0;

@@ -11,7 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.tugasbesar01.databinding.MenuFragmentBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -24,6 +29,8 @@ public class MenuFragment extends Fragment {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     StoragePreferences storage;
+
+    private MenuFragmentViewModel model;
 
 
     public static MenuFragment newInstance(String title) {
@@ -46,6 +53,8 @@ public class MenuFragment extends Fragment {
 
         /*
             retrieve data from storage at here
+
+            Storage purpose
 
          */
         preferences = getActivity().getSharedPreferences("title",Context.MODE_PRIVATE);
@@ -76,7 +85,9 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-
+                /*
+                    Method for adding menu title
+                 */
 
             }
         });
@@ -84,4 +95,10 @@ public class MenuFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        model = new ViewModelProvider(requireActivity()).get(MenuFragmentViewModel.class);
+
+    }
 }

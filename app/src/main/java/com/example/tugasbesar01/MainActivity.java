@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
         //debug
 
         fragmentManager = getSupportFragmentManager();
-        this.homeFragment =new HomeFragment();
+        this.menuFragment = MenuFragment.newInstance("test");
         ft = this.fragmentManager.beginTransaction();
-        ft.add(R.id.fragment_container,this.homeFragment)
+        ft.add(R.id.fragment_container,this.menuFragment)
                 .addToBackStack(null)
                 .commit();
 

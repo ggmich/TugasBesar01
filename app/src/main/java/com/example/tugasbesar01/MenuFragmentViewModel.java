@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel;
 
 public class MenuFragmentViewModel extends ViewModel {
 
-    private MutableLiveData<String> foodList;
+    private MutableLiveData<String> foodList =new MutableLiveData<>();
 
-    public MenuFragmentViewModel() {
-
+    public MenuFragmentViewModel(String foodList) {
+        this.foodList.setValue(foodList);
     }
 
     public MutableLiveData<String> getFoodList() {

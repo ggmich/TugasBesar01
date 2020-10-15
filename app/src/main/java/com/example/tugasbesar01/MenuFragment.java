@@ -21,6 +21,8 @@ import com.example.tugasbesar01.databinding.MenuFragmentBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 public class MenuFragment extends Fragment {
 
@@ -62,6 +64,19 @@ public class MenuFragment extends Fragment {
         storage = new StoragePreferences(preferences,editor);
         String items[] = storage.getMenuString();
 
+        /*
+            View Model Object
+         */
+        model = new ViewModelProvider(requireActivity()).get(MenuFragmentViewModel.class);
+        model.getFoodList().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                /*
+                    Method update UI
+                 */
+            }
+        });
+
 
         /*
             ListView Setup
@@ -93,12 +108,5 @@ public class MenuFragment extends Fragment {
         });
 
         return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        model = new ViewModelProvider(requireActivity()).get(MenuFragmentViewModel.class);
-
     }
 }

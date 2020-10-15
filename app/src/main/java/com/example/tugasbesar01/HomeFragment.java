@@ -27,7 +27,6 @@ public class HomeFragment extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         final SharedPreferences pref = this.getActivity().getSharedPreferences("title", Context.MODE_PRIVATE);
         obj = new StoragePreferences(pref,pref.edit());
         model = new HomeFragmentViewModel();

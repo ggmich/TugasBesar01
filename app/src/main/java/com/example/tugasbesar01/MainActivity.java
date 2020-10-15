@@ -25,12 +25,13 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
     FragmentManager fragmentManager;
     FragmentTransaction ft;
 
+
     private ActivityMainBinding binding;
 
     //debug
-    MenuFragment menuFragment;
-    HomeFragment homeFragment;
-
+    MenuFragment menuFragment = new MenuFragment();
+    HomeFragment homeFragment = new HomeFragment();
+    LeftFragment leftFragment = new LeftFragment();
     /*
         Test Storage
      */
@@ -57,24 +58,39 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
 
         //debug
 
-        fragmentManager = getSupportFragmentManager();
-        this.menuFragment = MenuFragment.newInstance("test");
-        ft = this.fragmentManager.beginTransaction();
-        ft.add(R.id.fragment_container,this.menuFragment)
-                .addToBackStack(null)
-                .commit();
-
-
-
+        this.fragmentManager = this.getSupportFragmentManager();
+        this.changePage("home");
 
     }
 
     public void changePage(String page){
+        ft = this.fragmentManager.beginTransaction();
         if(page.equals("home")){
             this.getSupportActionBar().setTitle("Makan Apa");
+            if(this.homeFragment.isAdded()) {
+                if(this.menuFragment.isAdded()){
+                    ft.hide(this.menuFragment);
+                }
+                ft.show(this.homeFragment);
+                ft.show(this.leftFragment);
+            }
+            else {
+                ft.add(R.id.fragment_container, this.homeFragment);
+                ft.add(R.id.left_drawer,this.leftFragment);
+            }
+            this.drawer.closeDrawers();
         }
         else if (page.equals("menu")){
             this.getSupportActionBar().setTitle("Menu");
+            ft.hide(this.homeFragment);
+
+            if(this.menuFragment.isAdded()) {
+                ft.show(this.menuFragment);
+            }
+            else {
+                ft.add(R.id.fragment_container, this.menuFragment);
+            }
+            this.drawer.closeDrawers();
         }
         else if(page.equals("search")){
             this.getSupportActionBar().setTitle("Search");
@@ -83,8 +99,10 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
             this.getSupportActionBar().setTitle("Settings");
         }
         else if (page.equals("exit")){
-            this.getSupportActionBar().setTitle("Exit");
+            this.moveTaskToBack(true);
+            this.finish();
         }
+        ft.commit();
     }
 
     /*

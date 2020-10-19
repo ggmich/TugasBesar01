@@ -20,6 +20,17 @@ public class StoragePreferences extends Activity {
         this.menuTitleEditor = menuTitleEditor;
     }
 
+    public StoragePreferences(SharedPreferences menuTitlePref, SharedPreferences menuDescPref, SharedPreferences menuTagPref, SharedPreferences menuRecipePref, SharedPreferences.Editor menuTitleEditor, SharedPreferences.Editor menuDescEditor, SharedPreferences.Editor menuTagEditor, SharedPreferences.Editor menuRecipeEditor) {
+        this.menuTitlePref = menuTitlePref;
+        this.menuDescPref = menuDescPref;
+        this.menuTagPref = menuTagPref;
+        this.menuRecipePref = menuRecipePref;
+        this.menuTitleEditor = menuTitleEditor;
+        this.menuDescEditor = menuDescEditor;
+        this.menuTagEditor = menuTagEditor;
+        this.menuRecipeEditor = menuRecipeEditor;
+    }
+
    
     public String[] getMenuString(){
         /*

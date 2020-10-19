@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tugasbesar01.databinding.MenuFragmentBinding;
@@ -33,6 +35,7 @@ public class MenuFragment extends Fragment {
     StoragePreferences storage;
 
     private MenuFragmentViewModel model;
+    private FragmentManager dialog;
 
 
     public static MenuFragment newInstance(String title) {
@@ -67,16 +70,17 @@ public class MenuFragment extends Fragment {
         /*
             View Model Object
          */
+        /*
         model = new ViewModelProvider(requireActivity()).get(MenuFragmentViewModel.class);
         model.getFoodList().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<String>() {
             @Override
             public void onChanged(String s) {
                 /*
                     Method update UI
-                 */
+
             }
         });
-
+        */
 
         /*
             ListView Setup
@@ -99,10 +103,12 @@ public class MenuFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 /*
                     Method for adding menu title
                  */
+                FragmentManager dialogMan = getChildFragmentManager();
+                MenuAddDialogFragment editDialog = MenuAddDialogFragment.newInstance("Add New Menu");
+                editDialog.show(dialogMan,"fragment_dialog");
 
             }
         });

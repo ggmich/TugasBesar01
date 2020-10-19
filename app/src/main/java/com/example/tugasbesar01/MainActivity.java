@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
     /*
         Test Storage
      */
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
+    private SharedPreferences preferences,descPref,tagPref,recipePref;
+    private SharedPreferences.Editor editor, descEdit, tagEdit,recipeEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,14 +112,44 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
 
         Resources res = getResources();
         String[] menuTitleArray = res.getStringArray(R.array.menuTitle);
+        String[] descArray = res.getStringArray(R.array.menuDesc);
+        String[] tagArray = res.getStringArray(R.array.menuTag);
+        String[] recipeArray = res.getStringArray(R.array.menuRecipe);
 
-        //test storage
+        // storage
         preferences = getSharedPreferences("title",Context.MODE_PRIVATE);
         editor = preferences.edit();
+
+        descPref = getSharedPreferences("desc",Context.MODE_PRIVATE);
+        descEdit = descPref.edit();
+        tagPref = getSharedPreferences("tag",Context.MODE_PRIVATE);
+        tagEdit = tagPref.edit();
+        recipePref = getSharedPreferences("recipe",Context.MODE_PRIVATE);
+        recipeEdit = recipePref.edit();
+
+        // menu title default initialization
         for(int i = 0; i < menuTitleArray.length; i++){
             editor.putString(String.valueOf(i),menuTitleArray[i]);
         }
         editor.apply();
+
+        // menu desc default initialization
+        for(int i = 0; i < descArray.length; i++){
+            descEdit.putString(String.valueOf(i),descArray[i]);
+        }
+        descEdit.apply();
+
+        // menu tag default initialization
+        for(int i = 0; i < tagArray.length; i++){
+            tagEdit.putString(String.valueOf(i),tagArray[i]);
+        }
+        tagEdit.apply();
+
+        // menu recipe default initialization
+        for(int i = 0; i < recipeArray.length; i++){
+            recipeEdit.putString(String.valueOf(i),recipeArray[i]);
+        }
+        recipeEdit.apply();
 
     }
 }

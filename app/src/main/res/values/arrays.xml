@@ -12,4 +12,45 @@
         <item>Sate Kulit Ayam</item>
         <item>Sate Taichan</item>
     </string-array>
+
+    <string-array name="menuDesc">
+        <item>Ayam goreng dengan cabai geprek</item>
+        <item>Ayam Goreng khas dari kentucky</item>
+        <item>Ayam petutu legendaris bali</item>
+        <item>Yamien manis dengan ayam</item>
+        <item>Mie asin dicampur jamur</item>
+        <item>Buntung goreng yang diberi kuah</item>
+        <item>Kaldu ayam dengan nasi</item>
+        <item>Sup isi sayur-sayuran dan lobak</item>
+        <item>Sate dari kulit ayam dibakar</item>
+        <item>Sate ayam biasa yang sangat pedas</item>
+    </string-array>
+
+    <string-array name="menuTag">
+        <item>Ayam</item>
+        <item>Ayam</item>
+        <item>Ayam</item>
+        <item>Yamien</item>
+        <item>Yamien </item>
+        <item>Sop</item>
+        <item>Sop</item>
+        <item>Soto</item>
+        <item>Sate</item>
+        <item>Sate</item>
+    </string-array>
+
+    <string-array name="menuRecipe">
+        <item>Ayam Cabai</item>
+        <item>Ayam Tepung</item>
+        <item>Ayam Arang</item>
+        <item>Mie Ayam Kecap</item>
+        <item>Mie Jamur Soy</item>
+        <item>Oxtail</item>
+        <item>Ayam rempah</item>
+        <item>Lobak rempah</item>
+        <item>Kulit ayam</item>
+        <item>ayam cabai cengek</item>
+    </string-array>
+
+
 </resources>

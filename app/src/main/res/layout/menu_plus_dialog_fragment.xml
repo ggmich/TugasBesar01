@@ -9,13 +9,15 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama: ">
         </TextView>
         <EditText
+            android:id="@+id/editName"
             android:layout_width="100sp"
             android:layout_height="wrap_content">
         </EditText>
@@ -32,6 +34,7 @@
             android:text="Desc: ">
         </TextView>
         <EditText
+            android:id="@+id/editDesc"
             android:layout_width="100sp"
             android:layout_height="wrap_content">
         </EditText>
@@ -49,6 +52,7 @@
             android:text="Tag: ">
         </TextView>
         <EditText
+            android:id="@+id/ediTag"
             android:layout_width="100sp"
             android:layout_height="wrap_content">
         </EditText>
@@ -66,9 +70,22 @@
             android:text="Recipe: ">
         </TextView>
         <EditText
+            android:id="@+id/editRecipe"
             android:layout_width="100sp"
             android:layout_height="wrap_content">
         </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add">
+
+        </Button>
+
     </LinearLayout>
 
 

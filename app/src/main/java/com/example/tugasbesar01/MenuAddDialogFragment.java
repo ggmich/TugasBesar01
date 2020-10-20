@@ -29,10 +29,6 @@ public class MenuAddDialogFragment extends DialogFragment {
         Bundle args = new Bundle();
         args.putString("titleDialog",title);
         frag.setArguments(args);
-
-
-
-
         return frag;
     }
 

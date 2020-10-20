@@ -3,7 +3,6 @@ package com.example.tugasbesar01;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +10,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tugasbesar01.databinding.MenuFragmentBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.ArrayList;
+
 
 public class MenuFragment extends Fragment {
 
@@ -70,21 +65,20 @@ public class MenuFragment extends Fragment {
         /*
             View Model Object
          */
-        /*
-        model = new ViewModelProvider(requireActivity()).get(MenuFragmentViewModel.class);
-        model.getFoodList().observe(getViewLifecycleOwner(), new androidx.lifecycle.Observer<String>() {
+
+        model = new ViewModelProvider(this).get(MenuFragmentViewModel.class);
+        model.getFoodList().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                /*
-                    Method update UI
 
             }
         });
-        */
+
 
         /*
             ListView Setup
          */
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,R.id.textList,items);
         listView.setDividerHeight(3);
         listView.setAdapter(adapter);

@@ -1,12 +1,16 @@
 package com.example.tugasbesar01;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Toast;
+
 import androidx.fragment.app.DialogFragment;
 import com.example.tugasbesar01.databinding.MenuPlusDialogFragmentBinding;
 
@@ -32,7 +36,8 @@ public class MenuAddDialogFragment extends DialogFragment {
         return frag;
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
+    @SuppressLint("CommitPrefEdits")
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = MenuPlusDialogFragmentBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
 
@@ -64,7 +69,7 @@ public class MenuAddDialogFragment extends DialogFragment {
         binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                storagePreferences.setData(binding.editName.getText().toString(),binding.editDesc.getText().toString(),binding.ediTag.getText().toString(),binding.editRecipe.getText().toString());
             }
         });
     }

@@ -63,5 +63,20 @@ public class StoragePreferences extends Activity {
         return temp;
     }
 
+    public void setData(String title,String desc, String tag, String recipe){
+        this.menuTitleEditor.putString(String.valueOf(latestKey(menuTitlePref)),title);
+        this.menuDescEditor.putString(String.valueOf(latestKey(menuDescPref)),desc);
+        this.menuTagEditor.putString(String.valueOf(latestKey(menuTagPref)),tag);
+        this.menuRecipeEditor.putString(String.valueOf(latestKey(menuRecipePref)),recipe);
 
+        this.menuTitleEditor.apply();
+        this.menuDescEditor.apply();
+        this.menuTagEditor.apply();
+        this.menuRecipeEditor.apply();
+    }
+
+    public int latestKey(SharedPreferences pref){
+        int a = pref.getAll().size();
+        return a;
+    }
 }

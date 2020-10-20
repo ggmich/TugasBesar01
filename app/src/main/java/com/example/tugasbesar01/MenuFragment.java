@@ -3,6 +3,7 @@ package com.example.tugasbesar01;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ public class MenuFragment extends Fragment {
 
     private MenuFragmentViewModel model;
     private FragmentManager dialog;
+    protected ArrayAdapter<String> adapter;
+    protected String items[];
 
 
     public static MenuFragment newInstance(String title) {
@@ -60,7 +63,7 @@ public class MenuFragment extends Fragment {
         preferences = getActivity().getSharedPreferences("title",Context.MODE_PRIVATE);
         editor = preferences.edit();
         storage = new StoragePreferences(preferences,editor);
-        String items[] = storage.getMenuString();
+        items = storage.getMenuString();
 
         /*
             View Model Object
@@ -79,7 +82,7 @@ public class MenuFragment extends Fragment {
             ListView Setup
          */
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,R.id.textList,items);
+        adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,R.id.textList,items);
         listView.setDividerHeight(3);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,7 +106,7 @@ public class MenuFragment extends Fragment {
                 FragmentManager dialogMan = getChildFragmentManager();
                 MenuAddDialogFragment editDialog = MenuAddDialogFragment.newInstance("Add New Menu");
                 editDialog.show(dialogMan,"fragment_dialog");
-
+                items = storage.getMenuString();
             }
         });
 

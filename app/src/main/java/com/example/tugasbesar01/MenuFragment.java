@@ -39,7 +39,8 @@ public class MenuFragment extends Fragment {
     public List<String> tempList;
     public ArrayList<String> menuItemsList;
     protected ListView listView;
-
+    private String selectedFromList;
+    private fragmentListener listener;
 
     public static MenuFragment newInstance(String title) {
         MenuFragment fragment = new MenuFragment();
@@ -85,6 +86,7 @@ public class MenuFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedFromList = (String) listView.getItemAtPosition(i);
                 //Toast.makeText(getContext(), selectedFromList, Toast.LENGTH_LONG).show();
+                listener.changePage("desc");
 
             }
         });
@@ -117,19 +119,20 @@ public class MenuFragment extends Fragment {
                 MenuAddDialogFragment editDialog = MenuAddDialogFragment.newInstance("Add New Menu");
                 editDialog.show(dialogMan,"fragment_dialog");
 
+
+
+
+/*
                 items = storage.getMenuString();
                 tempList = Arrays.asList(items);
-                //menuItemsList = new ArrayList<String>(tempList);
-                menuItemsList.add(tempList.get(items.length-1));
                 int a = storage.latestKey(preferences);
-
 
                 String test = model.refreshUI(menuItemsList,adapter,a);
                 Log.i("test: ", test);
-                //model.setFoodList(test);
+                menuItemsList.add(test);
 
-                //menuItemsList.add("ini iterasi");
                 adapter.notifyDataSetChanged();
+*/
 
 
 
@@ -139,5 +142,33 @@ public class MenuFragment extends Fragment {
         //
 
         return view;
+    }
+
+    public void updateList(){
+        items = storage.getMenuString();
+        tempList = Arrays.asList(items);
+        int a = storage.latestKey(preferences);
+
+        String test = model.refreshUI(menuItemsList,adapter,a);
+        Log.i("test: ", test);
+        menuItemsList.add(test);
+
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(context instanceof fragmentListener){
+            this.listener = (fragmentListener) context;
+        }
+        else{
+            throw new ClassCastException(context.toString()+" must implement FragmentListener");
+        }
+    }
+
+
+    public String getData(){
+        return selectedFromList;
     }
 }

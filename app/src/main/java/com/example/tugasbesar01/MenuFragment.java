@@ -25,9 +25,10 @@ import java.util.ArrayList;
 public class MenuFragment extends Fragment {
 
     private MenuFragmentBinding binding;
-
+    private String selectedFromList;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+    private fragmentListener listener;
     StoragePreferences storage;
 
     private MenuFragmentViewModel model;
@@ -45,6 +46,7 @@ public class MenuFragment extends Fragment {
 
 
     }
+
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,8 +90,9 @@ public class MenuFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedFromList = (String) listView.getItemAtPosition(i);
+                selectedFromList = (String) listView.getItemAtPosition(i);
                 Toast.makeText(getContext(), selectedFromList, Toast.LENGTH_LONG).show();
+                listener.changePage("desc");
             }
         });
 
@@ -112,4 +115,21 @@ public class MenuFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(context instanceof fragmentListener){
+            this.listener = (fragmentListener) context;
+        }
+        else{
+            throw new ClassCastException(context.toString()+" must implement FragmentListener");
+        }
+    }
+
+
+    public String getData(){
+        return selectedFromList;
+    }
+
 }

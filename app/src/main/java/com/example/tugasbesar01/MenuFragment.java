@@ -52,7 +52,7 @@ public class MenuFragment extends Fragment {
     }
 
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = MenuFragmentBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
 
@@ -119,21 +119,24 @@ public class MenuFragment extends Fragment {
 
                 items = storage.getMenuString();
                 tempList = Arrays.asList(items);
-                menuItemsList = new ArrayList<String>(tempList);
+                //menuItemsList = new ArrayList<String>(tempList);
+                menuItemsList.add(tempList.get(items.length-1));
                 int a = storage.latestKey(preferences);
 
 
                 String test = model.refreshUI(menuItemsList,adapter,a);
                 Log.i("test: ", test);
-                model.setFoodList(test);
-                /*
-                menuItemsList.add(test);
+                //model.setFoodList(test);
+
+                //menuItemsList.add("ini iterasi");
                 adapter.notifyDataSetChanged();
-                */
+
 
 
             }
         });
+
+        //
 
         return view;
     }

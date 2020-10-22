@@ -20,20 +20,25 @@ import com.example.tugasbesar01.databinding.MenuFragmentBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class MenuFragment extends Fragment {
 
     private MenuFragmentBinding binding;
 
-    private SharedPreferences preferences;
+    public SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     StoragePreferences storage;
 
     private MenuFragmentViewModel model;
     private FragmentManager dialog;
-    protected ArrayAdapter<String> adapter;
-    protected String items[];
+    public ArrayAdapter<String> adapter;
+    public String items[];
+    public List<String> tempList;
+    public ArrayList<String> menuItemsList;
+    protected ListView listView;
 
 
     public static MenuFragment newInstance(String title) {
@@ -52,7 +57,7 @@ public class MenuFragment extends Fragment {
         View view = binding.getRoot();
 
 
-        final ListView listView = (ListView)view.findViewById(R.id.listMenu);
+        listView = (ListView)view.findViewById(R.id.listMenu);
 
         /*
             retrieve data from storage at here
@@ -64,32 +69,37 @@ public class MenuFragment extends Fragment {
         editor = preferences.edit();
         storage = new StoragePreferences(preferences,editor);
         items = storage.getMenuString();
-
-        /*
-            View Model Object
-         */
-
-        model = new ViewModelProvider(this).get(MenuFragmentViewModel.class);
-        model.getFoodList().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-
-            }
-        });
-
+        tempList = Arrays.asList(items);
+        menuItemsList = new ArrayList<String>(tempList);
+        menuItemsList.add("====");
 
         /*
             ListView Setup
          */
 
-        adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,R.id.textList,items);
+        adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,R.id.textList,menuItemsList);
         listView.setDividerHeight(3);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedFromList = (String) listView.getItemAtPosition(i);
-                Toast.makeText(getContext(), selectedFromList, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), selectedFromList, Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        /*
+            View Model Object
+         */
+        String tempTitle = "";
+        model = new ViewModelProvider(this).get(MenuFragmentViewModel.class);
+        model.getFoodList().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.i("VM: ","ada perubahan " + s);
+                menuItemsList.add(s);
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -106,7 +116,22 @@ public class MenuFragment extends Fragment {
                 FragmentManager dialogMan = getChildFragmentManager();
                 MenuAddDialogFragment editDialog = MenuAddDialogFragment.newInstance("Add New Menu");
                 editDialog.show(dialogMan,"fragment_dialog");
+
                 items = storage.getMenuString();
+                tempList = Arrays.asList(items);
+                menuItemsList = new ArrayList<String>(tempList);
+                int a = storage.latestKey(preferences);
+
+
+                String test = model.refreshUI(menuItemsList,adapter,a);
+                Log.i("test: ", test);
+                model.setFoodList(test);
+                /*
+                menuItemsList.add(test);
+                adapter.notifyDataSetChanged();
+                */
+
+
             }
         });
 

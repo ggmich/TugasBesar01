@@ -12,6 +12,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.tugasbesar01.databinding.MenuPlusDialogFragmentBinding;
 
 public class MenuAddDialogFragment extends DialogFragment {
@@ -19,6 +21,7 @@ public class MenuAddDialogFragment extends DialogFragment {
     private MenuPlusDialogFragmentBinding binding;
     private StoragePreferences storagePreferences;
     private SharedPreferences menuPref, descPref, tagPref, recipePref;
+    MenuFragmentViewModel model;
 
     public MenuAddDialogFragment() {
 
@@ -50,6 +53,9 @@ public class MenuAddDialogFragment extends DialogFragment {
         // using override constructor number 2
         storagePreferences = new StoragePreferences(menuPref,descPref,tagPref,recipePref,menuPref.edit(),descPref.edit(),tagPref.edit(),recipePref.edit());
 
+        //view model
+        model = new ViewModelProvider(this).get(MenuFragmentViewModel.class);
+
         return view;
     }
 
@@ -70,6 +76,8 @@ public class MenuAddDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 storagePreferences.setData(binding.editName.getText().toString(),binding.editDesc.getText().toString(),binding.ediTag.getText().toString(),binding.editRecipe.getText().toString());
+                model.setFoodList(binding.editName.getText().toString());
+                dismiss();
             }
         });
     }

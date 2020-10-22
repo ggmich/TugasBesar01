@@ -2,9 +2,12 @@ package com.example.tugasbesar01;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.ArrayAdapter;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import java.util.ArrayList;
 
 public class MenuFragmentViewModel extends ViewModel {
 
@@ -21,8 +24,13 @@ public class MenuFragmentViewModel extends ViewModel {
         return foodList;
     }
 
-    public void setFoodList(MutableLiveData<String> foodList) {
-        this.foodList = foodList;
+    public void setFoodList(String foodList) {
+        this.foodList.setValue(foodList);
+    }
+
+    public String refreshUI(ArrayList<String> list, ArrayAdapter<String> adapter, int idx){
+        String test = list.get(idx-1);
+        return test;
     }
 
 

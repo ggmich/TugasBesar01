@@ -2,18 +2,14 @@ package com.example.tugasbesar01;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Toast;
-
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.example.tugasbesar01.databinding.MenuPlusDialogFragmentBinding;
 
 public class MenuAddDialogFragment extends DialogFragment {
@@ -21,7 +17,7 @@ public class MenuAddDialogFragment extends DialogFragment {
     private MenuPlusDialogFragmentBinding binding;
     private StoragePreferences storagePreferences;
     private SharedPreferences menuPref, descPref, tagPref, recipePref;
-    MenuFragmentViewModel model;
+    final public int REQUEST_CODE = 100;
 
     public MenuAddDialogFragment() {
 
@@ -75,8 +71,26 @@ public class MenuAddDialogFragment extends DialogFragment {
             public void onClick(View view) {
                 storagePreferences.setData(binding.editName.getText().toString(),binding.editDesc.getText().toString(),binding.ediTag.getText().toString(),binding.editRecipe.getText().toString());
 
+                // 999
+                sendResult(REQUEST_CODE,binding.editName.getText().toString());
+                clearWindow();
                 dismiss();
             }
         });
+    }
+
+    private void sendResult(int REQUEST_CODE, String res){
+        Intent intent = new Intent();
+        intent.putExtra("dialog_key",res);
+        getTargetFragment().onActivityResult(
+                getTargetRequestCode(),REQUEST_CODE,intent
+        );
+    }
+
+    private void clearWindow(){
+        binding.editName.getText().clear();
+        binding.editDesc.getText().clear();
+        binding.ediTag.getText().clear();
+        binding.editRecipe.getText().clear();
     }
 }

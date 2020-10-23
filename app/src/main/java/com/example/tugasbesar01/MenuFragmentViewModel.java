@@ -29,7 +29,7 @@ public class MenuFragmentViewModel extends ViewModel {
     }
 
     public String refreshUI(ArrayList<String> list, ArrayAdapter<String> adapter, int idx){
-        String test = list.get(idx-1);
+        String test = list.get(idx-2);
         return test;
     }
 

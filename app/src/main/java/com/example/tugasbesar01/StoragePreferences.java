@@ -47,7 +47,7 @@ public class StoragePreferences extends Activity {
         return items;
     }
 
-    public  String[] retrieveData(){
+    private  String[] retrieveData(){
         Map<String, ?> allEntry = menuTitlePref.getAll();
         String temp[];
         int index = 1;

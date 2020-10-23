@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuFragmentViewModel extends ViewModel {
 
@@ -24,14 +25,13 @@ public class MenuFragmentViewModel extends ViewModel {
         return foodList;
     }
 
-    public void setFoodList(String foodList) {
+    private void setFoodList(String foodList) {
         this.foodList.setValue(foodList);
     }
 
-    public String refreshUI(ArrayList<String> list, ArrayAdapter<String> adapter, int idx){
-        String test = list.get(idx-2);
-        return test;
+    public void refreshUI(List<String> list, int idx){
+        String res = list.get(idx-1);
+        setFoodList(res);
     }
-
 
 }

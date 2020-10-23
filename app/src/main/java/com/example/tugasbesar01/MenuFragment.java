@@ -96,7 +96,7 @@ public class MenuFragment extends Fragment {
         model.getFoodList().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                Log.i("VM: ","ada perubahan " + s);
+
                 menuItemsList.add(s);
                 adapter.notifyDataSetChanged();
             }
@@ -141,12 +141,7 @@ public class MenuFragment extends Fragment {
         tempList = Arrays.asList(items);
         int a = storage.latestKey(preferences);
 
-
-        String test = tempList.get(a-1);
-
-        menuItemsList.add(test);
-
-        adapter.notifyDataSetChanged();
+        model.refreshUI(tempList,a);
     }
 
     @Override

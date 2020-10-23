@@ -25,8 +25,7 @@ import java.util.List;
 public class MenuFragment extends Fragment {
 
     private MenuFragmentBinding binding;
-    public SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
+    public SharedPreferences menuPref,descPref,tagPref,recipePref;
     StoragePreferences storage;
     private MenuFragmentViewModel model;
     public ArrayAdapter<String> adapter;
@@ -38,6 +37,7 @@ public class MenuFragment extends Fragment {
     final private int REQUEST_CODE = 100;
     protected MenuAddDialogFragment editDialog;
     protected FragmentManager dialogMan;
+    int temp;
 
     public static MenuFragment newInstance(String title) {
         MenuFragment fragment = new MenuFragment();
@@ -63,13 +63,18 @@ public class MenuFragment extends Fragment {
             Storage purpose
 
          */
-        preferences = getActivity().getSharedPreferences("title",Context.MODE_PRIVATE);
-        editor = preferences.edit();
-        storage = new StoragePreferences(preferences,editor);
+        // storage initialiation
+        menuPref = getActivity().getSharedPreferences("title", Context.MODE_PRIVATE);
+        descPref = getActivity().getSharedPreferences("desc",Context.MODE_PRIVATE);
+        tagPref = getActivity().getSharedPreferences("tag",Context.MODE_PRIVATE);
+        recipePref = getActivity().getSharedPreferences("recipe",Context.MODE_PRIVATE);
+
+        // using override constructor number 2
+        storage = new StoragePreferences(menuPref,descPref,tagPref,recipePref,menuPref.edit(),descPref.edit(),tagPref.edit(),recipePref.edit());
+
         items = storage.getMenuString();
         tempList = Arrays.asList(items);
         menuItemsList = new ArrayList<String>(tempList);
-        //menuItemsList.add("====");
 
         /*
             ListView Setup
@@ -81,10 +86,26 @@ public class MenuFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedFromList = (String) listView.getItemAtPosition(i);
+                //String selectedFromList = (String) listView.getItemAtPosition(i);
                 //Toast.makeText(getContext(), selectedFromList, Toast.LENGTH_LONG).show();
                 listener.changePage("desc");
 
+            }
+        });
+
+        /*
+            List view Long Click listener delete
+         */
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                /*
+                storage.deleteObjectKey(i);
+                temp = i;
+                model.refreshDelStat();
+                
+                 */
+                return false;
             }
         });
 
@@ -98,6 +119,14 @@ public class MenuFragment extends Fragment {
             public void onChanged(String s) {
 
                 menuItemsList.add(s);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        model.getDeleteStat().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Log.i("test: ","lewat");
+                menuItemsList.remove(temp);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -137,7 +166,7 @@ public class MenuFragment extends Fragment {
     public void updateList(){
         items = storage.getMenuString();
         tempList = Arrays.asList(items);
-        int a = storage.latestKey(preferences);
+        int a = storage.latestKey(menuPref);
 
         model.refreshUI(tempList,a);
     }

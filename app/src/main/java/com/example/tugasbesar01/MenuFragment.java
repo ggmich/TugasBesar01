@@ -129,8 +129,6 @@ public class MenuFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == MenuAddDialogFragment.newInstance("").REQUEST_CODE){
-            String textTemp = data.getStringExtra("dialog_key");
-
             updateList();
         };
 

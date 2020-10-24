@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
         drawer.addDrawerListener(abdt);
         abdt.syncState();
 
-        //debug
-
         this.fragmentManager = this.getSupportFragmentManager();
         this.changePage("home");
 
@@ -152,6 +150,15 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
         recipePref = getSharedPreferences("recipe",Context.MODE_PRIVATE);
         recipeEdit = recipePref.edit();
 
+        /* hapus
+
+         */
+        /*
+        editor.clear().apply();
+        recipeEdit.clear().apply();
+        tagEdit.clear().apply();
+        recipeEdit.clear().apply();
+        */
         // menu title default initialization
         for(int i = 0; i < menuTitleArray.length; i++){
             editor.putString(String.valueOf(i),menuTitleArray[i]);

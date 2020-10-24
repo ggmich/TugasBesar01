@@ -47,7 +47,7 @@ public class StoragePreferences extends Activity {
         return items;
     }
 
-    public  String[] retrieveData(){
+    private  String[] retrieveData(){
         Map<String, ?> allEntry = menuTitlePref.getAll();
         String temp[];
         int index = 1;
@@ -78,5 +78,19 @@ public class StoragePreferences extends Activity {
     public int latestKey(SharedPreferences pref){
         int a = pref.getAll().size();
         return a;
+    }
+
+    public void deleteObjectKey(int position){
+        String pos = String.valueOf(position);
+        this.menuTitleEditor.remove(pos);
+        this.menuDescEditor.remove(pos);
+        this.menuTagEditor.remove(pos);
+        this.menuRecipeEditor.remove(pos);
+
+        this.menuTitleEditor.apply();
+        this.menuDescEditor.apply();
+        this.menuTagEditor.apply();
+        this.menuRecipeEditor.apply();
+
     }
 }

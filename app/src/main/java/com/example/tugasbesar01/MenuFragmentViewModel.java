@@ -40,7 +40,7 @@ public class MenuFragmentViewModel extends ViewModel {
     }
 
     public void refreshDelStat(){
-        if(this.deleteStat.getValue() || this.deleteStat.equals(null)){
+        if(this.deleteStat == null || this.deleteStat.getValue() ){
             this.deleteStat.setValue(false);
         }
         else{

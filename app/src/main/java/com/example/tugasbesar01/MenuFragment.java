@@ -103,7 +103,7 @@ public class MenuFragment extends Fragment {
                 storage.deleteObjectKey(i);
                 temp = i;
                 model.refreshDelStat();
-                
+
                  */
                 return false;
             }

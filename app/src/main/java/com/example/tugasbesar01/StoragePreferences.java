@@ -108,7 +108,5 @@ public class StoragePreferences extends Activity {
 
     }
 
-    //test revert
-
 
 }

@@ -72,8 +72,6 @@ public class MenuAddDialogFragment extends DialogFragment {
             public void onClick(View view) {
                 storagePreferences.setData(binding.editName.getText().toString(),binding.editDesc.getText().toString(),binding.ediTag.getText().toString(),binding.editRecipe.getText().toString());
 
-
-                // 999
                 sendResult(REQUEST_CODE,binding.editName.getText().toString());
                 clearWindow();
                 dismiss();

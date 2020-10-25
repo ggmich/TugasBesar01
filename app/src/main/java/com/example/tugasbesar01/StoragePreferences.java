@@ -78,7 +78,7 @@ public class StoragePreferences extends Activity {
 
     public void deleteObjectKey(int position,int listLength){
         String pos = String.valueOf(position);
-        sortKey(position,listLength);
+
         this.menuTitleEditor.remove(pos);
         this.menuDescEditor.remove(pos);
         this.menuTagEditor.remove(pos);
@@ -89,6 +89,8 @@ public class StoragePreferences extends Activity {
         this.menuTagEditor.apply();
         this.menuRecipeEditor.apply();
 
+        sortKey(position,listLength);
+
     }
 
     private void sortKey(int position,int length){
@@ -96,13 +98,23 @@ public class StoragePreferences extends Activity {
         desc = new ArrayList<>();
         tag = new ArrayList<>();
         recipe = new ArrayList<>();
-
+        int temporary = -1;
         for(int i = 0; i < length; i++){
-            if(i != position){
+            if(i > position){
                 this.title.add(this.menuTitlePref.getString(String.valueOf(i),"null"));
                 this.desc.add(this.menuDescPref.getString(String.valueOf(i),"null"));
                 this.tag.add(this.menuTagPref.getString(String.valueOf(i),"null"));
                 this.recipe.add(this.menuRecipePref.getString(String.valueOf(i),"null"));
+            }
+            else if(i == position){
+                temporary = i;
+            }
+            else{
+                this.title.add(this.menuTitlePref.getString(String.valueOf(temporary),"null"));
+                this.desc.add(this.menuDescPref.getString(String.valueOf(temporary),"null"));
+                this.tag.add(this.menuTagPref.getString(String.valueOf(temporary),"null"));
+                this.recipe.add(this.menuRecipePref.getString(String.valueOf(temporary),"null"));
+                temporary++;
             }
         }
 

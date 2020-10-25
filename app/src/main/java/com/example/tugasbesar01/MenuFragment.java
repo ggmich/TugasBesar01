@@ -3,6 +3,7 @@ package com.example.tugasbesar01;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ public class MenuFragment extends Fragment {
     protected MenuAddDialogFragment editDialog;
     protected FragmentManager dialogMan;
     int temp;
+    ArrayList<String> title,desc,tag,recipe;
 
     public static MenuFragment newInstance(String title) {
         MenuFragment fragment = new MenuFragment();
@@ -99,12 +101,16 @@ public class MenuFragment extends Fragment {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                /*
-                storage.deleteObjectKey(i);
-                temp = i;
-                model.refreshDelStat();
 
-                 */
+                storage.deleteObjectKey(i,menuItemsList.size());
+                setDatabase(storage.title,storage.desc,storage.tag,storage.recipe);
+                //temp = i;
+                //refreshTitleData();
+                //adapter.notifyDataSetChanged();
+                model.setBoolean();
+                refreshTitleData();
+                adapter.notifyDataSetChanged();
+
                 return false;
             }
         });
@@ -122,20 +128,21 @@ public class MenuFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-        /*
-        model.getDeleteStat().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                Log.i("test: ","lewat");
-                menuItemsList.remove(temp);
-                adapter.notifyDataSetChanged();
-            }
-        });
-        */
+
+
+        model.getDeleteStat().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer) {
+                        Log.i("test: ", integer.toString());
+                        refreshTitleData();
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
         /*
             Floating Action Button setup
          */
-        dialogMan = getParentFragmentManager();
+                dialogMan = getParentFragmentManager();
         editDialog = MenuAddDialogFragment.newInstance("Add New Menu");
         editDialog.setTargetFragment(this,REQUEST_CODE);
 
@@ -180,6 +187,35 @@ public class MenuFragment extends Fragment {
         }
         else{
             throw new ClassCastException(context.toString()+" must implement FragmentListener");
+        }
+    }
+
+    public void setDatabase(ArrayList title, ArrayList desc,ArrayList tag,ArrayList recipe){
+
+        this.title = title;
+        this.desc = desc;
+        this.tag = tag;
+        this.recipe = recipe;
+
+        // menu title default initialization
+        for(int i = 0; i < this.title.size(); i++){
+            menuPref.edit().putString(String.valueOf(i), String.valueOf(this.title.get(i)));
+            descPref.edit().putString(String.valueOf(i),String.valueOf(this.desc.get(i)));
+            tagPref.edit().putString(String.valueOf(i),String.valueOf(this.tag.get(i)));
+            recipePref.edit().putString(String.valueOf(i),String.valueOf(this.recipe.get(i)));
+
+        }
+        menuPref.edit().apply();
+        descPref.edit().apply();
+        tagPref.edit().apply();
+        recipePref.edit().apply();
+    }
+
+
+    public void refreshTitleData(){
+        this.menuItemsList.clear();
+        for(int i = 0; i < this.title.size(); i++){
+            this.menuItemsList.add(this.title.get(i));
         }
     }
 

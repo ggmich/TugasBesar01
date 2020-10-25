@@ -1,19 +1,15 @@
 package com.example.tugasbesar01;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-
-import androidx.appcompat.app.AppCompatActivity;
-
+import java.util.ArrayList;
 import java.util.Map;
 
 public class StoragePreferences extends Activity {
 
     protected SharedPreferences menuTitlePref,menuDescPref,menuTagPref,menuRecipePref;
     protected SharedPreferences.Editor menuTitleEditor, menuDescEditor,menuTagEditor,menuRecipeEditor;
+    public ArrayList<String> title,desc,tag,recipe;
 
     public StoragePreferences(SharedPreferences menuTitlePref, SharedPreferences.Editor menuTitleEditor) {
         this.menuTitlePref = menuTitlePref;
@@ -80,8 +76,9 @@ public class StoragePreferences extends Activity {
         return a;
     }
 
-    public void deleteObjectKey(int position){
+    public void deleteObjectKey(int position,int listLength){
         String pos = String.valueOf(position);
+        sortKey(position,listLength);
         this.menuTitleEditor.remove(pos);
         this.menuDescEditor.remove(pos);
         this.menuTagEditor.remove(pos);
@@ -93,4 +90,23 @@ public class StoragePreferences extends Activity {
         this.menuRecipeEditor.apply();
 
     }
+
+    private void sortKey(int position,int length){
+        title = new ArrayList<>();
+        desc = new ArrayList<>();
+        tag = new ArrayList<>();
+        recipe = new ArrayList<>();
+
+        for(int i = 0; i < length; i++){
+            if(i != position){
+                this.title.add(this.menuTitlePref.getString(String.valueOf(i),"null"));
+                this.desc.add(this.menuDescPref.getString(String.valueOf(i),"null"));
+                this.tag.add(this.menuTagPref.getString(String.valueOf(i),"null"));
+                this.recipe.add(this.menuRecipePref.getString(String.valueOf(i),"null"));
+            }
+        }
+
+    }
+
+
 }

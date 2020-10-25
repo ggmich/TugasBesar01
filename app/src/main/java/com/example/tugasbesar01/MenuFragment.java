@@ -1,6 +1,7 @@
 package com.example.tugasbesar01;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,32 +11,33 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.tugasbesar01.databinding.MenuFragmentBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class MenuFragment extends Fragment {
 
     private MenuFragmentBinding binding;
-    private String selectedFromList;
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
-    private fragmentListener listener;
+    public SharedPreferences menuPref,descPref,tagPref,recipePref;
     StoragePreferences storage;
-
     private MenuFragmentViewModel model;
-    private FragmentManager dialog;
-    protected ArrayAdapter<String> adapter;
-    protected String items[];
-
+    public ArrayAdapter<String> adapter;
+    public String items[];
+    public List<String> tempList;
+    public ArrayList<String> menuItemsList;
+    protected ListView listView;
+    private fragmentListener listener;
+    final private int REQUEST_CODE = 100;
+    protected MenuAddDialogFragment editDialog;
+    protected FragmentManager dialogMan;
+    int temp;
 
     public static MenuFragment newInstance(String title) {
         MenuFragment fragment = new MenuFragment();
@@ -48,13 +50,12 @@ public class MenuFragment extends Fragment {
     }
 
 
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = MenuFragmentBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
 
 
-        final ListView listView = (ListView)view.findViewById(R.id.listMenu);
+        listView = (ListView)view.findViewById(R.id.listMenu);
 
         /*
             retrieve data from storage at here
@@ -62,92 +63,112 @@ public class MenuFragment extends Fragment {
             Storage purpose
 
          */
-        preferences = getActivity().getSharedPreferences("title",Context.MODE_PRIVATE);
-        editor = preferences.edit();
-        storage = new StoragePreferences(preferences,editor);
+        // storage initialiation
+        menuPref = getActivity().getSharedPreferences("title", Context.MODE_PRIVATE);
+        descPref = getActivity().getSharedPreferences("desc",Context.MODE_PRIVATE);
+        tagPref = getActivity().getSharedPreferences("tag",Context.MODE_PRIVATE);
+        recipePref = getActivity().getSharedPreferences("recipe",Context.MODE_PRIVATE);
+
+        // using override constructor number 2
+        storage = new StoragePreferences(menuPref,descPref,tagPref,recipePref,menuPref.edit(),descPref.edit(),tagPref.edit(),recipePref.edit());
+
         items = storage.getMenuString();
+        tempList = Arrays.asList(items);
+        menuItemsList = new ArrayList<String>(tempList);
 
         /*
-            View Model Object
+            ListView Setup
          */
 
-        model = new ViewModelProvider(this).get(MenuFragmentViewModel.class);
-        model.getFoodList().observe(getViewLifecycleOwner(), new Observer<String>() {
+        adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,R.id.textList,menuItemsList);
+        listView.setDividerHeight(3);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onChanged(String s) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //String selectedFromList = (String) listView.getItemAtPosition(i);
+                //Toast.makeText(getContext(), selectedFromList, Toast.LENGTH_LONG).show();
+                listener.changePage("desc");
 
             }
         });
 
-<<<<<<< Updated upstream
-=======
         /*
             List view Long Click listener delete
          */
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                storage.deleteObjectKey(i,menuItemsList.size()-1);
+                /*
+                storage.deleteObjectKey(i);
                 temp = i;
-                ArrayList<String> title = storage.title;
-                ArrayList<String> desc = storage.desc;
-                ArrayList<String> tag = storage.tag;
-                ArrayList<String> recipe = storage.recipe;
-
-                for(int z = 0; i < menuItemsList.size(); i++){
-                    menuPref.edit().putString(String.valueOf(z),title.get(z));
-                    descPref.edit().putString(String.valueOf(z),desc.get(z));
-                    tagPref.edit().putString(String.valueOf(z),tag.get(z));
-                    recipePref.edit().putString(String.valueOf(z),recipe.get(z));
-                }
-                menuPref.edit().apply();
-                descPref.edit().apply();
-                tagPref.edit().apply();
-                recipePref.edit().apply();
-
                 model.refreshDelStat();
 
-
+                 */
                 return false;
             }
         });
->>>>>>> Stashed changes
 
         /*
-            ListView Setup
+            View Model Object
          */
-
-        adapter = new ArrayAdapter<String>(getActivity(),R.layout.item_list_menu_string,R.id.textList,items);
-        listView.setDividerHeight(3);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        String tempTitle = "";
+        model = new ViewModelProvider(this).get(MenuFragmentViewModel.class);
+        model.getFoodList().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedFromList = (String) listView.getItemAtPosition(i);
-                Toast.makeText(getContext(), selectedFromList, Toast.LENGTH_LONG).show();
-                listener.changePage("desc");
+            public void onChanged(String s) {
+
+                menuItemsList.add(s);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        model.getDeleteStat().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Log.i("test: ","lewat");
+                menuItemsList.remove(temp);
+                adapter.notifyDataSetChanged();
             }
         });
 
         /*
             Floating Action Button setup
          */
+        dialogMan = getParentFragmentManager();
+        editDialog = MenuAddDialogFragment.newInstance("Add New Menu");
+        editDialog.setTargetFragment(this,REQUEST_CODE);
+
         FloatingActionButton fab = binding.fabPlus;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /*
-                    Method for adding menu title
+                    Calling fragment for inserting the new data, then it will send a callback to onActivityResult after 'ADD' button clicked
                  */
-                FragmentManager dialogMan = getChildFragmentManager();
-                MenuAddDialogFragment editDialog = MenuAddDialogFragment.newInstance("Add New Menu");
                 editDialog.show(dialogMan,"fragment_dialog");
-                items = storage.getMenuString();
             }
         });
 
+
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == MenuAddDialogFragment.newInstance("").REQUEST_CODE){
+            updateList();
+        };
+
+    }
+
+    public void updateList(){
+        items = storage.getMenuString();
+        tempList = Arrays.asList(items);
+        int a = storage.latestKey(menuPref);
+
+        model.refreshUI(tempList,a);
     }
 
     @Override
@@ -159,11 +180,6 @@ public class MenuFragment extends Fragment {
         else{
             throw new ClassCastException(context.toString()+" must implement FragmentListener");
         }
-    }
-
-
-    public String getData(){
-        return selectedFromList;
     }
 
 }

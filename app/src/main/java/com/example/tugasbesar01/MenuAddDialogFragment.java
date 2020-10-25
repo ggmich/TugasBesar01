@@ -17,7 +17,10 @@ public class MenuAddDialogFragment extends DialogFragment {
     private MenuPlusDialogFragmentBinding binding;
     private StoragePreferences storagePreferences;
     private SharedPreferences menuPref, descPref, tagPref, recipePref;
+<<<<<<< HEAD
     final public int REQUEST_CODE = 100;
+=======
+>>>>>>> parent of 15e8b28... Merge branch 'master' of https://github.com/ggmich/TugasBesar01
 
     public MenuAddDialogFragment() {
 
@@ -49,7 +52,6 @@ public class MenuAddDialogFragment extends DialogFragment {
         // using override constructor number 2
         storagePreferences = new StoragePreferences(menuPref,descPref,tagPref,recipePref,menuPref.edit(),descPref.edit(),tagPref.edit(),recipePref.edit());
 
-
         return view;
     }
 
@@ -70,11 +72,14 @@ public class MenuAddDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 storagePreferences.setData(binding.editName.getText().toString(),binding.editDesc.getText().toString(),binding.ediTag.getText().toString(),binding.editRecipe.getText().toString());
+<<<<<<< HEAD
 
                 // 999
                 sendResult(REQUEST_CODE,binding.editName.getText().toString());
                 clearWindow();
                 dismiss();
+=======
+>>>>>>> parent of 15e8b28... Merge branch 'master' of https://github.com/ggmich/TugasBesar01
             }
         });
     }

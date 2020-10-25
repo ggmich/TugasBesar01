@@ -2,14 +2,16 @@ package com.example.tugasbesar01;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.ArrayAdapter;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+>>>>>>> parent of 15e8b28... Merge branch 'master' of https://github.com/ggmich/TugasBesar01
 public class MenuFragmentViewModel extends ViewModel {
 
     private MutableLiveData<String> foodList =new MutableLiveData<>();
@@ -26,6 +28,7 @@ public class MenuFragmentViewModel extends ViewModel {
         return foodList;
     }
 
+<<<<<<< HEAD
     public MutableLiveData<Boolean> getDeleteStat(){
         return deleteStat;
     }
@@ -37,6 +40,10 @@ public class MenuFragmentViewModel extends ViewModel {
     public void refreshUI(List<String> list, int idx){
         String res = list.get(idx-1);
         setFoodList(res);
+=======
+    public void setFoodList(MutableLiveData<String> foodList) {
+        this.foodList = foodList;
+>>>>>>> parent of 15e8b28... Merge branch 'master' of https://github.com/ggmich/TugasBesar01
     }
 
     public void refreshDelStat(){

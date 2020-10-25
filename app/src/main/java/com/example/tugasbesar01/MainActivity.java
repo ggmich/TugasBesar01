@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
     MenuFragment menuFragment = new MenuFragment();
     HomeFragment homeFragment = new HomeFragment();
     LeftFragment leftFragment = new LeftFragment();
-    DescFragment descFragment = new DescFragment();
     /*
         Test Storage
      */
@@ -70,9 +69,6 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
                 if(this.menuFragment.isAdded()){
                     ft.hide(this.menuFragment);
                 }
-                if (this.descFragment.isAdded()){
-                    ft.hide(this.descFragment);
-                }
                 ft.show(this.homeFragment);
                 ft.show(this.leftFragment);
             }
@@ -85,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
         else if (page.equals("menu")){
             this.getSupportActionBar().setTitle("Menu");
             ft.hide(this.homeFragment);
-            ft.hide(this.descFragment);
 
             if(this.menuFragment.isAdded()) {
                 ft.show(this.menuFragment);
@@ -104,26 +99,6 @@ public class MainActivity extends AppCompatActivity implements fragmentListener{
         else if (page.equals("exit")){
             this.moveTaskToBack(true);
             this.finish();
-        } else if (page.equals("desc")) {
-            this.getSupportActionBar().setTitle("Description");
-
-            ft.hide(this.menuFragment);
-            ft.hide(this.homeFragment);
-
-            String data = this.menuFragment.getData();
-            descFragment = DescFragment.newInstance(data);
-
-            if(descFragment.isAdded()){
-                ft.show(this.descFragment);
-            }
-            else {
-                ft.add(R.id.fragment_container, this.descFragment);
-            }
-
-
-
-
-
         }
         ft.commit();
     }

@@ -17,7 +17,9 @@ public class MenuAddDialogFragment extends DialogFragment {
     private MenuPlusDialogFragmentBinding binding;
     private StoragePreferences storagePreferences;
     private SharedPreferences menuPref, descPref, tagPref, recipePref;
+
     final public int REQUEST_CODE = 100;
+
 
     public MenuAddDialogFragment() {
 
@@ -49,7 +51,6 @@ public class MenuAddDialogFragment extends DialogFragment {
         // using override constructor number 2
         storagePreferences = new StoragePreferences(menuPref,descPref,tagPref,recipePref,menuPref.edit(),descPref.edit(),tagPref.edit(),recipePref.edit());
 
-
         return view;
     }
 
@@ -71,10 +72,12 @@ public class MenuAddDialogFragment extends DialogFragment {
             public void onClick(View view) {
                 storagePreferences.setData(binding.editName.getText().toString(),binding.editDesc.getText().toString(),binding.ediTag.getText().toString(),binding.editRecipe.getText().toString());
 
+
                 // 999
                 sendResult(REQUEST_CODE,binding.editName.getText().toString());
                 clearWindow();
                 dismiss();
+
             }
         });
     }

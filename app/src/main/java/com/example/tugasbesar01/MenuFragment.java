@@ -88,7 +88,7 @@ public class MenuFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //String selectedFromList = (String) listView.getItemAtPosition(i);
                 //Toast.makeText(getContext(), selectedFromList, Toast.LENGTH_LONG).show();
-                listener.changePage("desc");
+                //listener.changePage("desc");
 
             }
         });
@@ -122,6 +122,7 @@ public class MenuFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
+        /*
         model.getDeleteStat().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -130,7 +131,7 @@ public class MenuFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-
+        */
         /*
             Floating Action Button setup
          */

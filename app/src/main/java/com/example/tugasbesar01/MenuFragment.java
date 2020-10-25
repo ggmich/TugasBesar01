@@ -79,6 +79,40 @@ public class MenuFragment extends Fragment {
             }
         });
 
+<<<<<<< Updated upstream
+=======
+        /*
+            List view Long Click listener delete
+         */
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                storage.deleteObjectKey(i,menuItemsList.size()-1);
+                temp = i;
+                ArrayList<String> title = storage.title;
+                ArrayList<String> desc = storage.desc;
+                ArrayList<String> tag = storage.tag;
+                ArrayList<String> recipe = storage.recipe;
+
+                for(int z = 0; i < menuItemsList.size(); i++){
+                    menuPref.edit().putString(String.valueOf(z),title.get(z));
+                    descPref.edit().putString(String.valueOf(z),desc.get(z));
+                    tagPref.edit().putString(String.valueOf(z),tag.get(z));
+                    recipePref.edit().putString(String.valueOf(z),recipe.get(z));
+                }
+                menuPref.edit().apply();
+                descPref.edit().apply();
+                tagPref.edit().apply();
+                recipePref.edit().apply();
+
+                model.refreshDelStat();
+
+
+                return false;
+            }
+        });
+>>>>>>> Stashed changes
 
         /*
             ListView Setup
